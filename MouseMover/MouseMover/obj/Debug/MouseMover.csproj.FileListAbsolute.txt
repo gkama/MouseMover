@@ -1,0 +1,8 @@
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\bin\Debug\MouseMover.exe.config
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\bin\Debug\MouseMover.exe
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\bin\Debug\MouseMover.pdb
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\obj\Debug\MouseMover.csprojResolveAssemblyReference.cache
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\obj\Debug\MouseMover.Properties.Resources.resources
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\obj\Debug\MouseMover.csproj.GenerateResource.Cache
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\obj\Debug\MouseMover.exe
+C:\Users\gkam4141\Documents\GitHub\MouseMover\MouseMover\MouseMover\obj\Debug\MouseMover.pdb
