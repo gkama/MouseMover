@@ -1,0 +1,5 @@
+C:\Users\gkam4141\Documents\GitHub\MouseMover\XMLReader\XMLReader\bin\Debug\XMLReader.pdb
+C:\Users\gkam4141\Documents\GitHub\MouseMover\XMLReader\XMLReader\obj\Debug\XMLReader.csprojResolveAssemblyReference.cache
+C:\Users\gkam4141\Documents\GitHub\MouseMover\XMLReader\XMLReader\obj\Debug\XMLReader.pdb
+C:\Users\gkam4141\Documents\GitHub\MouseMover\XMLReader\XMLReader\bin\Debug\XMLReader.exe
+C:\Users\gkam4141\Documents\GitHub\MouseMover\XMLReader\XMLReader\obj\Debug\XMLReader.exe
