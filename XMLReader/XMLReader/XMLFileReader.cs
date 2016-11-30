@@ -9,19 +9,32 @@ using System.Collections.Generic;
 
 namespace XMLReader
 {
-    public class XMLFileReader : XmlDocument
+    public class XMLFileReader
     {
-        //Path
-        public string XMLDocPath { get; set; }
+        ///
+        /// Wrapper Class
+        ///
 
-        //Empty Contrustor
-        public XMLFileReader() { }
+        //Path
+        private string XMLDocPath { get; set; }
+
+        //Wrapper Variables
+        private XMLFileProperties.Tags _Tags = new XMLFileProperties.Tags();
+        private XMLFileProperties.Text _Text = new XMLFileProperties.Text();
+        private XMLFileProperties.Attributes _Attributes = new XMLFileProperties.Attributes(); 
+
         //Constructor with XML Doc Path
         public XMLFileReader(string xmlDocPath)
         {
             XMLDocPath = xmlDocPath;
+
+            _Tags.XMLDocPath = XMLDocPath;
+            _Text.XMLDocPath = XMLDocPath;
+            _Attributes.XMLDocPath = XMLDocPath;
         }
+             
         
+        //For Testing
         //Entry point
         static int Main(string[] args)
         {
@@ -34,6 +47,49 @@ namespace XMLReader
 
             return 0;
         }
+        
+        #region Wrapper Functions - Tags/Text/Attributes
+        //Wrapper Functions
+        //Tags
+        public List<string> Tags()
+        {
+            return _Tags.GetTags();
+        }
+        public string ReadTags()
+        {
+            return _Tags.ReadTags();
+        }
+        public Dictionary<string, string> ReadTagsTextValues()
+        {
+            return _Tags.ReadTagsTextValues();
+        }
+        public Dictionary<string, string> ReadTagsAttributesValues()
+        {
+            return _Tags.ReadTagsAttributesValues();
+        }
+
+        //Text
+        public string ReadTagsText()
+        { 
+            return _Text.ReadTagsText(); 
+        }
+        public string ReadTextOnly()
+        { 
+            return _Text.ReadTextOnly(); 
+        }
+
+        //Attributes
+        public string ReadAttributes()
+        {
+            return _Attributes.ReadAttributes();
+        }
+        public string ReadAttributesOnly()
+        {
+            return _Attributes.ReadAttributesOnly();
+        }
+        #endregion
+
+
 
         //Read everything
         public string Read()
