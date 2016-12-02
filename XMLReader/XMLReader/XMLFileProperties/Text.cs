@@ -22,6 +22,7 @@ namespace XMLReader.XMLFileProperties
             XMLDocPath = xmlDocPath;
         }
 
+        //Gets all the Text stored in the XML File
         public List<string> GetText()
         {
             List<string> _Text = new List<string>();
@@ -99,6 +100,24 @@ namespace XMLReader.XMLFileProperties
             catch (Exception e)
             {
                 return e.Message;
+            }
+        }
+
+        //Copies the file over converted to .txt
+        public void ConvertFileToTxt(string DestinationPath)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(XMLDocPath) + ".txt";
+            try
+            {
+                //If there is no file name specified in the Destination Path
+                if (string.IsNullOrEmpty(Path.GetFileNameWithoutExtension(DestinationPath)))
+                    File.Copy(XMLDocPath, Path.Combine(DestinationPath, fileName), true);
+                else
+                    File.Copy(XMLDocPath, DestinationPath, true);
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

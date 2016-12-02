@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="XMLFileProperties\Attributes.cs" />
     <Compile Include="XMLFileProperties\Elements.cs" />
     <Compile Include="XMLFileProperties\Text.cs" />

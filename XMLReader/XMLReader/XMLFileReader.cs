@@ -19,53 +19,54 @@ namespace XMLReader
         private string XMLDocPath { get; set; }
 
         //Wrapper Variables
-        private XMLFileProperties.Tags _Tags = new XMLFileProperties.Tags();
+        private XMLFileProperties.Elements _Elements = new XMLFileProperties.Elements();
         private XMLFileProperties.Text _Text = new XMLFileProperties.Text();
         private XMLFileProperties.Attributes _Attributes = new XMLFileProperties.Attributes(); 
 
         //Constructor with XML Doc Path
         public XMLFileReader(string xmlDocPath)
         {
-            XMLDocPath = xmlDocPath;
+            if (File.Exists(xmlDocPath))
+            { //If the path exists
+                XMLDocPath = xmlDocPath;
 
-            _Tags.XMLDocPath = XMLDocPath;
-            _Text.XMLDocPath = XMLDocPath;
-            _Attributes.XMLDocPath = XMLDocPath;
-        }
-             
-        
-        //For Testing
-        //Entry point
-        static int Main(string[] args)
-        {
-            string testPath = @"C:\Work\Testing\Archive\test.xml";
-            XMLFileProperties.Tags XMLFileProp = new XMLFileProperties.Tags();
-            XMLFileProp.XMLDocPath = testPath;
-            
-            //Console.Write(XMLFileProp.Read());
-            Dictionary<string, string> t = XMLFileProp.ReadTagsTextValues();
-
-            return 0;
+                _Elements.XMLDocPath = XMLDocPath;
+                _Text.XMLDocPath = XMLDocPath;
+                _Attributes.XMLDocPath = XMLDocPath;
+            }
+            else
+            {
+                throw new Exception("File Path DOES NOT EXIST: " + xmlDocPath);
+            }
         }
         
-        #region Wrapper Functions - Tags/Text/Attributes
+        
+        #region Wrapper Functions - Elements/Text/Attributes
         //Wrapper Functions
-        //Tags
-        public List<string> Tags()
+        //Elements
+        public List<string> Elements()
         {
-            return _Tags.GetTags();
+            return _Elements.GetElements();
         }
-        public string ReadTags()
+        public string ReadElements()
         {
-            return _Tags.ReadTags();
+            return _Elements.ReadElements();
         }
-        public Dictionary<string, string> ReadTagsTextValues()
+        public string GetElement(string TagName)
         {
-            return _Tags.ReadTagsTextValues();
+            return _Elements.GetElement(TagName);
         }
-        public Dictionary<string, string> ReadTagsAttributesValues()
+        public string GetElementValue(string TagName)
         {
-            return _Tags.ReadTagsAttributesValues();
+            return _Elements.GetElementValue(TagName);
+        }
+        public Dictionary<string, string> ReadElementsText()
+        {
+            return _Elements.ReadElementsText();
+        }
+        public Dictionary<string, string> ReadElementsAttributes()
+        {
+            return _Elements.ReadElementsAttributes();
         }
 
         //Text
@@ -76,6 +77,10 @@ namespace XMLReader
         public string ReadTextOnly()
         { 
             return _Text.ReadTextOnly(); 
+        }
+        public void ConvertFileToTxt(string DestinationPath)
+        {
+            _Text.ConvertFileToTxt(DestinationPath);
         }
 
         //Attributes

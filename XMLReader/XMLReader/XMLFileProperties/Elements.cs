@@ -9,31 +9,31 @@ using System.Collections.Generic;
 
 namespace XMLReader.XMLFileProperties
 {
-    class Tags
+    class Elements
     {
         //Path
         public string XMLDocPath { get; set; }
 
         //Empty Contrustor
-        public Tags() { }
+        public Elements() { }
         //Constructor with XML Doc Path
-        public Tags(string xmlDocPath)
+        public Elements(string xmlDocPath)
         {
             XMLDocPath = xmlDocPath;
         }
 
-        public List<string> GetTags()
+        public List<string> GetElements()
         {
             List<string> _Tags = new List<string>();
             string[] stringSeparators = new string[] { "\r\n" };
-            foreach (string s in ReadTags().Split(stringSeparators, StringSplitOptions.None))
+            foreach (string s in ReadElements().Split(stringSeparators, StringSplitOptions.None))
                 if (!string.IsNullOrEmpty(s))
                     _Tags.Add(s.TrimStart('<').TrimEnd('>'));
             return _Tags;
         }
 
         //Get the list of all tags in the XML Document
-        public string ReadTags()
+        public string ReadElements()
         {
             try
             {
@@ -71,8 +71,76 @@ namespace XMLReader.XMLFileProperties
             }
         }
 
+        //Return everything that is inside that Tag
+        public string GetElement(string TagName)
+        {
+            try
+            {
+                StringBuilder elements = new StringBuilder();
+                XmlDocument xDoc = new XmlDocument();
+                xDoc.Load(XMLDocPath);
+
+                XmlNodeList elList = xDoc.GetElementsByTagName(TagName);
+                if (elList.Count == 0)
+                    return "";
+                else
+                {
+                    for (int i = 0; i < elList.Count; i++)
+                        elements.Append(elList[i].InnerXml).Append("\r\n");
+                }
+                return elements.ToString();
+            }
+            catch (FileNotFoundException)
+            {
+                return "Could not find file: " + XMLDocPath;
+            }
+            catch (XmlException)
+            {
+                return "Could not parse file: " + XMLDocPath;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+        //Return specific tag's value, as long as it's not a parent
+        public string GetElementValue(string TagName)
+        {
+            try
+            {
+                StringBuilder values = new StringBuilder();
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(XMLDocPath);
+
+                XmlNodeList elList = xmlDoc.GetElementsByTagName(TagName);
+                for (int i = 0; i < elList.Count; i++)
+                {
+                    XmlNodeList elListNodes = elList[i].ChildNodes;
+                    foreach (XmlNode xNode in elListNodes)
+                    {
+                        if (xNode.ChildNodes.Count == 0) //When there are no child nodes
+                            values.Append(xNode.Value).Append(',');
+                    }
+                }
+                //Return
+                return values.ToString().TrimEnd(',');
+            }
+            catch (FileNotFoundException)
+            {
+                return "Could not find file: " + XMLDocPath;
+            }
+            catch (XmlException)
+            {
+                return "Could not parse file: " + XMLDocPath;
+            }
+            catch (Exception e)
+            {
+                return e.Message;
+            }
+        }
+
         //Prase the XML file and store each tag with it's corresponding text value
-        public Dictionary<string, string> ReadTagsTextValues()
+        public Dictionary<string, string> ReadElementsText()
         {
             Dictionary<string, string> toReturn = new Dictionary<string, string>();
             try
@@ -118,7 +186,7 @@ namespace XMLReader.XMLFileProperties
         }
 
         //Attributes
-        public Dictionary<string, string> ReadTagsAttributesValues()
+        public Dictionary<string, string> ReadElementsAttributes()
         {
             Dictionary<string, string> toReturn = new Dictionary<string, string>();
             try
