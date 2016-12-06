@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>XMLFileReader</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>Georgi Kamacharov</authors>
     <owners>Georgi Kamacharov</owners>
     <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
@@ -10,11 +10,10 @@
     <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XML File Reader with various useful functionality to read all data from the XML File</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
     <copyright>Copyright 2016</copyright>
-    <tags>XML xml file FILE reader reader</tags>
-    <dependencies>
-      <dependency id="SampleDependency" version="1.0" />
-    </dependencies>
+    <tags>XML xml file FILE reader READER</tags>
   </metadata>
+  <files>
+    <file src="XMLReader\bin\Debug\XMLReader.dll" target="lib" />
+  </files>
 </package>
