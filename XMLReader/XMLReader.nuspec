@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>XMLFileReader</id>
-    <version>1.0.2</version>
+    <id>XML.Reader</id>
+    <version>1.0.3</version>
     <authors>Georgi Kamacharov</authors>
     <owners>Georgi Kamacharov</owners>
     <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XML File Reader with various useful functionality to read all data from the XML File</description>
     <copyright>Copyright 2016</copyright>
-    <tags>XML xml file FILE reader READER</tags>
+    <tags>xml XML file FILE reader READER</tags>
   </metadata>
   <files>
     <file src="XMLReader\bin\Debug\XMLReader.dll" target="lib" />

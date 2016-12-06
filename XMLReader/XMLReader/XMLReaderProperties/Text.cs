@@ -61,7 +61,7 @@ namespace XMLReader.XMLReaderProperties
             }
             catch (XmlException)
             {
-                return "Could not parse file. Make sure it's in the correct format.";
+                return "Could not parse XML string. Make sure it's in the correct format.";
             }
             catch (Exception e)
             {
@@ -87,7 +87,7 @@ namespace XMLReader.XMLReaderProperties
             }
             catch (XmlException)
             {
-                return "Could not parse file. Make sure it's in the correct format.";
+                return "Could not parse XML string. Make sure it's in the correct format.";
             }
             catch (Exception e)
             {
