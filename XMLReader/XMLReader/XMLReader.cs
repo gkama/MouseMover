@@ -9,38 +9,26 @@ using System.Collections.Generic;
 
 namespace XMLReader
 {
-    public class XMLFileReader
+    class XMLReader
     {
-        ///
-        /// Wrapper Class
-        ///
-
-        //Path
-        private string XMLDocPath { get; set; }
+        //String
+        private string XMLString { get; set; }
 
         //Wrapper Variables
-        private XMLFileProperties.Elements _Elements = new XMLFileProperties.Elements();
-        private XMLFileProperties.Text _Text = new XMLFileProperties.Text();
-        private XMLFileProperties.Attributes _Attributes = new XMLFileProperties.Attributes(); 
+        private XMLReaderProperties.Elements _Elements = new XMLReaderProperties.Elements();
+        private XMLReaderProperties.Text _Text = new XMLReaderProperties.Text();
+        private XMLReaderProperties.Attributes _Attributes = new XMLReaderProperties.Attributes();
 
         //Constructor with XML Doc Path
-        public XMLFileReader(string xmlDocPath)
+        public XMLReader(string xmlString)
         {
-            if (File.Exists(xmlDocPath))
-            { //If the path exists
-                XMLDocPath = xmlDocPath;
+            XMLString = xmlString;
 
-                _Elements.XMLDocPath = XMLDocPath;
-                _Text.XMLDocPath = XMLDocPath;
-                _Attributes.XMLDocPath = XMLDocPath;
-            }
-            else
-            {
-                throw new Exception("File Path DOES NOT EXIST: " + xmlDocPath);
-            }
+            _Elements.XMLString = xmlString;
+            _Text.XMLString = xmlString;
+            _Attributes.XMLString = xmlString;
         }
-        
-        
+
         #region Wrapper Functions - Elements/Text/Attributes
         //Wrapper Functions
         //Elements
@@ -75,16 +63,12 @@ namespace XMLReader
             return _Text.GetText();
         }
         public string ReadTagsText()
-        { 
-            return _Text.ReadTagsText(); 
+        {
+            return _Text.ReadTagsText();
         }
         public string ReadTextOnly()
-        { 
-            return _Text.ReadTextOnly(); 
-        }
-        public void ConvertFileToTxt(string DestinationPath)
         {
-            _Text.ConvertFileToTxt(DestinationPath);
+            return _Text.ReadTextOnly();
         }
 
         //Attributes
@@ -103,6 +87,16 @@ namespace XMLReader
         #endregion
 
 
+        //MAIN FOR TESTING
+        /*
+        static void Main()
+        {
+            XMLReader r = new XMLReader("<?xml version=\"1.0\" encoding=\"utf-8\"?><output><outputOrigin href=\"asd\">T</outputOrigin><outputID>GBCTST90     </outputID><formatOrigin>P</formatOrigin><formatID>GBCTST93    </formatID><jobTime /><alwaysCreate>N</alwaysCreate><deliveries><delivery><transType>TST</transType><transMethod>        </transMethod><emailAddr>georgi.kamacharov@convergys.com</emailAddr><fileName /></delivery></deliveries><scn>M9F526YNJ</scn><scn>M9F526YNJ2</scn><scn>M9F526YNJ4</scn><logic /></output>");
+            XMLFileReader rr = new XMLFileReader(@"C:\Work\Testing\Archive\test.xml");
+            bool b = r.ReadElementsText().Equals(rr.ReadElementsText());
+
+            Console.WriteLine(rr.ReadElementsText());
+        }*/
 
         //Read everything
         public string Read()
@@ -110,7 +104,7 @@ namespace XMLReader
             try
             {
                 StringBuilder readOutput = new StringBuilder();
-                XmlReader xmlReader = XmlReader.Create(XMLDocPath);
+                XmlReader xmlReader = XmlReader.Create(new StringReader(XMLString));
                 while (xmlReader.Read())
                 {
                     switch (xmlReader.NodeType)
@@ -134,13 +128,9 @@ namespace XMLReader
                 }
                 return readOutput.ToString();
             }
-            catch (FileNotFoundException)
-            {
-                return "Could not find file: " + XMLDocPath;
-            }
             catch (XmlException)
             {
-                return "Could not parse file: " + XMLDocPath;
+                return "Could not parse XML string. Make sure it's in the correct format.";
             }
             catch (Exception e)
             {
